@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ course.name }} - Course Management System{% endblock %}
+
+{% block content %}
+<div class="course-detail-header">
+    <a href="/courses/" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Courses
+    </a>
+</div>
+
+<div class="course-detail-container">
+    <div class="course-main">
+        <div class="detail-card">
+            <div class="detail-title">
+                <h1>{{ course.name }}</h1>
+                <span class="status-badge">Active</span>
+            </div>
+
+            <div class="detail-section">
+                <h3><i class="fas fa-book"></i> About This Course</h3>
+                <p class="description-full">{{ course.description }}</p>
+            </div>
+
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <div class="detail-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="detail-content">
+                        <h4>Course Instructor</h4>
+                        <p>{{ course.instructor }}</p>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="detail-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="detail-content">
+                        <h4>Credit Units</h4>
+                        <p>{{ course.credits }} Credits</p>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="detail-icon">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <div class="detail-content">
+                        <h4>Created</h4>
+                        <p>{{ course.created_at|date:"M d, Y" }}</p>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="detail-icon">
+                        <i class="fas fa-id-badge"></i>
+                    </div>
+                    <div class="detail-content">
+                        <h4>Course ID</h4>
+                        <p>#{{ course.id }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <h3><i class="fas fa-info-circle"></i> Course Information</h3>
+                <div class="info-table">
+                    <div class="info-row">
+                        <div class="info-label">Course Title</div>
+                        <div class="info-value">{{ course.name }}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Instructor Name</div>
+                        <div class="info-value">{{ course.instructor }}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Total Credits</div>
+                        <div class="info-value">
+                            <span class="credit-badge">{{ course.credits }}</span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Offered Since</div>
+                        <div class="info-value">{{ course.created_at|date:"Y" }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="enrollCourse()">
+                    <i class="fas fa-user-plus"></i> Enroll Now
+                </button>
+                <button class="btn btn-secondary" onclick="downloadSyllabus()">
+                    <i class="fas fa-download"></i> Download Syllabus
+                </button>
+                <button class="btn btn-outline" onclick="shareButton()">
+                    <i class="fas fa-share"></i> Share
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="course-sidebar">
+        <div class="sidebar-card">
+            <h3><i class="fas fa-graduation-cap"></i> Quick Stats</h3>
+            <div class="stats-list">
+                <div class="stat-item">
+                    <span>Credit Hours</span>
+                    <strong>{{ course.credits }}</strong>
+                </div>
+                <div class="stat-item">
+                    <span>Instructor</span>
+                    <strong>Available</strong>
+                </div>
+                <div class="stat-item">
+                    <span>Status</span>
+                    <strong>Active</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-card">
+            <h3><i class="fas fa-lightbulb"></i> Course Benefits</h3>
+            <ul class="benefits-list">
+                <li><i class="fas fa-check"></i> Expert instruction</li>
+                <li><i class="fas fa-check"></i> Practical skills</li>
+                <li><i class="fas fa-check"></i> Flexible schedule</li>
+                <li><i class="fas fa-check"></i> Certificate upon completion</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+function enrollCourse() {
+    alert('Enrollment for {{ course.name }} has been initiated!\nPlease complete your registration at the admin panel.');
+}
+
+function downloadSyllabus() {
+    alert('Syllabus download for {{ course.name }} would be initiated here.');
+}
+
+function shareButton() {
+    alert('Share functionality: {{ course.name }}');
+}
+</script>
+{% endblock %}

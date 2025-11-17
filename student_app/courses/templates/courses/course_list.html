@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Courses - Course Management System{% endblock %}
+
+{% block content %}
+<div class="courses-header">
+    <h1><i class="fas fa-book-open"></i> Our Courses</h1>
+    <p>Select a course to view detailed information about credits and instructors</p>
+</div>
+
+<div class="courses-container">
+    <div class="courses-grid">
+        {% for course in courses %}
+        <div class="course-card">
+            <div class="course-header">
+                <h2>{{ course.name }}</h2>
+                <span class="credits-badge">{{ course.credits }} Credits</span>
+            </div>
+            
+            <div class="course-body">
+                <p class="description">{{ course.description|truncatewords:30 }}</p>
+                
+                <div class="course-info">
+                    <div class="info-item">
+                        <i class="fas fa-user-tie"></i>
+                        <span><strong>Instructor:</strong> {{ course.instructor }}</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span><strong>Credits:</strong> {{ course.credits }}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="course-footer">
+                <a href="/courses/{{ course.id }}/" class="btn btn-view">
+                    <i class="fas fa-eye"></i> View Details
+                </a>
+                <button class="btn btn-select" onclick="selectCourse({{ course.id }}, '{{ course.name }}')">
+                    <i class="fas fa-check"></i> Select
+                </button>
+            </div>
+        </div>
+        {% empty %}
+        <div class="no-courses">
+            <i class="fas fa-inbox"></i>
+            <p>No courses available at the moment</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="selected-courses">
+        <h3><i class="fas fa-list"></i> Selected Courses</h3>
+        <div id="selected-list">
+            <p class="empty-message">No courses selected yet</p>
+        </div>
+        <div class="selected-info" id="selected-info">
+            <p><strong>Total Credits:</strong> <span id="total-credits">0</span></p>
+        </div>
+    </div>
+</div>
+
+<script>
+let selectedCourses = [];
+
+function selectCourse(id, name) {
+    if (!selectedCourses.find(c => c.id === id)) {
+        const creditsElement = event.target.closest('.course-card').querySelector('.credits-badge');
+        const credits = parseInt(creditsElement.textContent);
+        
+        selectedCourses.push({ id, name, credits });
+        updateSelectedList();
+    }
+}
+
+function updateSelectedList() {
+    const listContainer = document.getElementById('selected-list');
+    
+    if (selectedCourses.length === 0) {
+        listContainer.innerHTML = '<p class="empty-message">No courses selected yet</p>';
+        document.getElementById('total-credits').textContent = '0';
+        return;
+    }
+
+    let html = '<ul class="selected-items">';
+    let totalCredits = 0;
+
+    selectedCourses.forEach((course, index) => {
+        html += `
+            <li class="selected-item">
+                <span>${course.name} (${course.credits} credits)</span>
+                <button class="btn-remove" onclick="removeCourse(${index})">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </li>
+        `;
+        totalCredits += course.credits;
+    });
+
+    html += '</ul>';
+    listContainer.innerHTML = html;
+    document.getElementById('total-credits').textContent = totalCredits;
+}
+
+function removeCourse(index) {
+    selectedCourses.splice(index, 1);
+    updateSelectedList();
+}
+</script>
+{% endblock %}

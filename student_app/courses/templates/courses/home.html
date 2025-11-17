@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - Course Management System{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="hero-content">
+        <h1>Welcome to Course Hub</h1>
+        <p>Explore our comprehensive course offerings and manage your academic journey</p>
+        <a href="/courses/" class="btn btn-primary">
+            <i class="fas fa-book"></i> Explore Courses
+        </a>
+    </div>
+</div>
+
+<div class="features">
+    <div class="feature-card">
+        <div class="feature-icon">
+            <i class="fas fa-laptop-code"></i>
+        </div>
+        <h3>Technology Programs</h3>
+        <p>Learn cutting-edge technology with BBIT and Computer Network Security courses</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3>Security & Engineering</h3>
+        <p>Master software engineering and cybersecurity principles from industry experts</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">
+            <i class="fas fa-chart-bar"></i>
+        </div>
+        <h3>Business Skills</h3>
+        <p>Develop financial literacy and business management expertise</p>
+    </div>
+</div>
+
+<div class="stats">
+    <div class="stat">
+        <h2>4</h2>
+        <p>Expert Programs</p>
+    </div>
+    <div class="stat">
+        <h2>4</h2>
+        <p>Professional Instructors</p>
+    </div>
+    <div class="stat">
+        <h2>273</h2>
+        <p>Total Credits Available</p>
+    </div>
+</div>
+{% endblock %}
