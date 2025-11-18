@@ -1,0 +1,33 @@
+# Documentation files
+*.md
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.eggs/
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Database
+db.sqlite3
+
+# Static files
+/staticfiles/
+
+# Logs
+*.log
